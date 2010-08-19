@@ -1,0 +1,13 @@
+
+    var b = new jQuery.Bitly({login: 'LOGIN', key: 'KEY'});
+    b.shorten('http://google.com', function(short_url){ console.debug(short_url)} );
+
+    var b2 = new jQuery.Bitly();
+    b2.shorten('http://google.com', function(short_url){ console.debug(short_url)} );
+
+    b2.shorten('http://google.com', {
+        login: 'LOGIN', 
+        key: 'KEY', 
+        onSuccess: function(short_url){ console.debug(short_url)} 
+    });
+

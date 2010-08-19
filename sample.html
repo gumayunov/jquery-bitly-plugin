@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="ru-RU"
+      xmlns:og="http://opengraphprotocol.org/schema/"
+      xmlns:fb="http://www.facebook.com/2008/fbml"> 
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script> 
+    <script type="text/javascript" src="jquery.bitly.js"></script> 
+</head>
+
+<body>
+    <style>
+        .test-form .result .error {color: red;}
+        .test-form label {display: block;}
+    </style>
+
+    <div class="test-form">
+        <p>
+            <label for="bitly-login">Bit.ly login:</label>
+            <input id="bitly-login" type="text"/>
+        </p>
+        <p>
+            <label for="bitly-key">Bit.ly key:</label>
+            <input id="bitly-key" type="text"/>
+        </p>
+        <p>
+            <label for="long_url">Url to short:</label>
+            <input id="long_url" type="text" value="http://google.com"/>
+        </p>
+        <p>
+            <button>Test!</button>
+        </p>
+        <div class="result"></div>
+    </div>
+
+    <script type="text/javascript" >
+        $(window).load(function() {
+            $('.test-form button').click(function(){
+                var opts = { login: $('#bitly-login').val(), key: $('#bitly-key').val() };
+                var bitly = new $.Bitly(opts);
+                var long_url = $('#long_url').val();
+                var result = function(msg) { $('.test-form .result').append(msg) };
+
+                bitly.shorten(long_url, { 
+                    onSuccess: function(short_url) { 
+                        result('<p> Shorten! <b>'+long_url+'</b> - '+short_url+'</p>')
+                    },
+                    onError: function(data) {
+                        result('<p class="error"> Error: '+data.errorCode+': '+data.errorMessage+'</p>')
+                    }
+                });
+            });
+        });
+        
+    </script>
+</body>
+
+</html>
