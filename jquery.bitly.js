@@ -29,7 +29,7 @@ jQuery.extend(jQuery.Bitly.prototype, {
             return;
         }
 
-        var url = "http://api.bit.ly/shorten?" +"longUrl="+long_url
+        var url = "http://api.bit.ly/shorten?" +"longUrl="+encodeURIComponent(long_url)
             +"&login="+options.login +"&apiKey="+options.key
             +"&history="+options.history +"&version="+options.version
             +"&format=json&callback=?";
